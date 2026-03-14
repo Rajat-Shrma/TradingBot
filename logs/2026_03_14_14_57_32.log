@@ -1,0 +1,6 @@
+2026-03-14 14:57:32,940 | INFO | root | Line: 55 | Message: CLI begins
+2026-03-14 14:57:32,940 | INFO | root | Line: 76 | Message: Parameter validation completed.
+2026-03-14 14:57:33,408 | INFO | root | Line: 86 | Message: BinanceClient created
+2026-03-14 14:57:33,408 | INFO | root | Line: 12 | Message: Sending Order request | symbol=BTCUSDT, side=SELL, type=LIMIT, qty=0.01, price=60000.0, stop_price=None
+2026-03-14 14:57:34,544 | ERROR | root | Line: 30 | Message: Order failed: APIError(code=-4024): Limit price can't be lower than 67114.09.
+2026-03-14 14:57:34,544 | ERROR | root | Line: 100 | Message: Order creation failed: Error occurred at line number [17] of file [C:\Users\hp\OneDrive\Desktop\MY\trading_bot\bot\components\orders.py]. Error says: [APIError(code=-4024): Limit price can't be lower than 67114.09.]

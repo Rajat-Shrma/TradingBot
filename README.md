@@ -2,29 +2,36 @@
 
 ## Overview
 This project is a Python command line trading bot developed as part of a Python Developer internship assignment.  
-The bot interacts with the **Binance Futures Testnet (USDT‑M)** to place trading orders using a CLI interface.
+The bot interacts with the **Binance Futures Testnet (USDT-M)** to place trading orders through a CLI interface.
 
-It supports **MARKET, LIMIT, and STOP-LIMIT orders**, and demonstrates clean Python architecture with:
-- modular code structure
-- input validation using Pydantic
-- structured logging
-- custom exception handling
+Supported order types:
+- MARKET
+- LIMIT
+- STOP-LIMIT (Bonus Feature)
+
+The project demonstrates:
+- Modular project architecture
+- CLI interface
+- Input validation using Pydantic
+- Structured logging
+- Custom exception handling
+- Interaction with Binance Futures API
 
 ---
 
 ## Features
 
-### Core Functionality
+### Core Features
 - Place **MARKET orders**
 - Place **LIMIT orders**
-- Support **BUY and SELL**
-- CLI-based user interface
+- Support **BUY** and **SELL**
+- CLI based interface
 - Input validation using **Pydantic**
-- Structured logging
-- Custom exception handling
+- Structured **logging**
+- Custom **exception handling**
 
 ### Bonus Feature
-- Support for **STOP‑LIMIT orders**
+- **STOP-LIMIT order support**
 
 ---
 
@@ -83,27 +90,69 @@ python-dotenv
 
 ---
 
-## Binance Futures Testnet Setup
+# Getting Started
 
-1. Open Binance Futures Testnet
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/trading-bot.git
+```
+
+Navigate to the project directory
+
+```bash
+cd trading-bot
+```
+
+---
+
+## 2. Create Virtual Environment (Recommended)
+
+Create virtual environment
+
+```bash
+python -m venv venv
+```
+
+Activate environment
+
+### Linux / Mac
+
+```bash
+source venv/bin/activate
+```
+
+### Windows
+
+```bash
+venv\Scripts\activate
+```
+
+---
+
+## 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 4. Configure Binance Testnet API Keys
+
+Open Binance Futures Testnet
 
 ```
 https://testnet.binancefuture.com
 ```
 
-2. Login using GitHub authentication.
+Create API credentials and add them in a `.env` file.
 
-3. Navigate to **API Management**.
-
-4. Generate API credentials.
-
-5. Create a `.env` file in the project root.
-
-Example `.env` file
+Example:
 
 ```bash
-API_KEY=your_api_key
-SECRET_KEY=your_secret_key
+BINANCE_API_KEY=your_api_key
+BINANCE_SECRET_KEY=your_secret_key
 ```
 
 ---
@@ -115,17 +164,6 @@ General command format
 ```bash
 python cli.py --symbol SYMBOL --side SIDE --type ORDER_TYPE --quantity QUANTITY --price PRICE --stop_price STOP_PRICE
 ```
-
-### Parameters
-
-| Parameter | Description |
-|----------|-------------|
-| symbol | Trading pair (example BTCUSDT) |
-| side | BUY or SELL |
-| type | MARKET, LIMIT, or STOP_LIMIT |
-| quantity | Amount of asset |
-| price | Required for LIMIT and STOP_LIMIT |
-| stop_price | Trigger price for STOP_LIMIT |
 
 ---
 
@@ -143,26 +181,11 @@ python cli.py --symbol BTCUSDT --side BUY --type MARKET --quantity 0.01
 python cli.py --symbol BTCUSDT --side SELL --type LIMIT --quantity 0.01 --price 60000
 ```
 
-### Stop‑Limit Order (Bonus Feature)
+### Stop-Limit Order
 
 ```bash
 python cli.py --symbol BTCUSDT --side BUY --type STOP_LIMIT --quantity 0.01 --price 59000 --stop_price 59200
 ```
-
-### Explanation
-
-The `stop_price` triggers the order.  
-When the stop price is reached, a **limit order** is placed at the specified `price`.
-
-Example scenario
-
-```
-Current BTC price = 58500
-stop_price = 59200
-limit_price = 59000
-```
-
-When BTC reaches **59200**, a limit buy order at **59000** is created.
 
 ---
 
@@ -193,15 +216,15 @@ All API requests, responses, and errors are logged.
 Log file location
 
 ```
-logs/
+logs/trading_bot.log
 ```
 
-Example log entry
+Example log
 
 ```
-2026-03-14 13:10:47,757 | INFO | root | Line: 15 | Message: Begins
-2026-03-14 13:10:47,757 | INFO | root | Line: 38 | Message: Parameter Validation Completed.
-2026-03-14 13:10:48,087 | INFO | root | Line: 47 | Message: Binance Client object Created.
+2026-03-14 14:12:03 | INFO | Sending order request
+2026-03-14 14:12:04 | INFO | Order response received
+2026-03-14 14:12:04 | ERROR | API error occurred
 ```
 
 ---
@@ -210,16 +233,12 @@ Example log entry
 
 The system handles:
 
-- Invalid CLI inputs
+- Invalid CLI input
 - Validation errors
 - Binance API failures
 - Network errors
 
-Custom exceptions ensure that errors are reported clearly without crashing the application.
-For easy Debugging line number and file are inculded in error message.
-```
-Error example : bot.exception.custom_exception.CustomException: Error occured at line number [48] of file [C:\Users\hp\OneDrive\Desktop\MY\trading_bot\cli.py. Error says: [Error occured at line number [14] of file [C:\Users\hp\OneDrive\Desktop\MY\trading_by parameter 'triggerprice' was not sent, was empty/null, or malformed.]]]]
-```
+Custom exceptions ensure errors are reported clearly without crashing the application.
 
 ---
 
@@ -227,12 +246,12 @@ Error example : bot.exception.custom_exception.CustomException: Error occured at
 
 - The bot connects only to **Binance Futures Testnet**
 - Testnet funds are used for simulated trading
-- LIMIT orders require a price
-- STOP‑LIMIT orders require both `price` and `stop_price`
+- LIMIT orders require `price`
+- STOP-LIMIT orders require both `price` and `stop_price`
 
 ---
 
 ## Author
 
 Rajat  
-
+Python Developer Internship Assignment

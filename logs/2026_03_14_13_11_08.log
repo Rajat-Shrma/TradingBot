@@ -1,0 +1,5 @@
+2026-03-14 13:11:08,196 | INFO | root | Line: 15 | Message: Begins
+2026-03-14 13:11:08,197 | INFO | root | Line: 38 | Message: Parameter Validation Completed.
+2026-03-14 13:11:08,950 | INFO | root | Line: 47 | Message: Binance Client object Created.
+2026-03-14 13:11:08,950 | INFO | root | Line: 10 | Message: Sending Order request | symbol=BTCUSDT, side=SELL, type=MARKET, qty=0.01, price=None, stop_price=None
+2026-03-14 13:11:09,498 | INFO | root | Line: 23 | Message: Order response: {'orderId': 12804658329, 'symbol': 'BTCUSDT', 'status': 'NEW', 'clientOrderId': 'x-Cb7ytekJ5a600ab624ba21bf3dca7c', 'price': '0.00', 'avgPrice': '0.00', 'origQty': '0.010', 'executedQty': '0.000', 'cumQty': '0.000', 'cumQuote': '0.00000', 'timeInForce': 'GTC', 'type': 'MARKET', 'reduceOnly': False, 'closePosition': False, 'side': 'SELL', 'positionSide': 'BOTH', 'stopPrice': '0.00', 'workingType': 'CONTRACT_PRICE', 'priceProtect': False, 'origType': 'MARKET', 'priceMatch': 'NONE', 'selfTradePreventionMode': 'EXPIRE_MAKER', 'goodTillDate': 0, 'updateTime': 1773474069468}

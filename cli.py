@@ -68,7 +68,6 @@ def main():
             order.price,
             order.stop_price,
         )
-        logging.info('API response Recieved.')
 
         print("\nOrder Response")
         print("----------------------")

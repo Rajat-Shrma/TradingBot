@@ -40,6 +40,20 @@ def main():
     except Exception as e:
         logging.error(f"Validation error: {e}")
         raise CustomException(e, sys)
+    
+        # Print order request summary
+    print("\nOrder Request")
+    print("----------------------")
+    print(f"Symbol: {order.symbol}")
+    print(f"Side: {order.side}")
+    print(f"Order Type: {order.order_type}")
+    print(f"Quantity: {order.quantity}")
+
+    if order.order_type == "LIMIT":
+        print(f"Price: {order.price}")
+    if order.order_type == "STOP":
+        print(f"Price: {order.price}")
+        print(f"Stop Price: {order.stop_price}")
 
     try:
 
@@ -54,23 +68,26 @@ def main():
             order.price,
             order.stop_price,
         )
+        logging.info('API response Recieved.')
 
-        api_response = {
-            "message": "success",
-            "symbol": response.get("symbol"),
-            "executedQty": response.get("executedQty"),
-            "avgPrice": response.get("avgPrice"),
-            "status": response.get("status"),
-        }
+        print("\nOrder Response")
+        print("----------------------")
+        print("Message: Success")
         if response.get("orderType") == "STOP":
-            api_response["algoId"] = response.get("algoId")
+            print(f"Algo ID: {response.get('algoId')}")
         else:
-            api_response["orderId"] = response.get("orderId")
-
-        print("API Response: ", api_response)
+            print(f"Order ID: {response.get('orderId')}")
+        
+        print(f"Status: {response.get('status')}")
+        print(f"Executed Quantity: {response.get('executedQty')}")
+        print(f"Average Price: {response.get('avgPrice', 'N/A')}")
+        
 
     except Exception as e:
-        response = {"message": "failed"}
+        response = {"message": "Failed"}
+        print("Order Failed\n")
+        print("------------------------")
+        print('Message: ', response.get('message'))
         logging.error(f"API error: {e}")
         raise CustomException(e, sys)
 

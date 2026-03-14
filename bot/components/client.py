@@ -23,6 +23,5 @@ class BinanceClient:
             params["price"]= price
             params["triggerprice"]=stop_price
             params["timeInForce"]="GTC"
-        print(params)
 
         return self.client.futures_create_order(**params)

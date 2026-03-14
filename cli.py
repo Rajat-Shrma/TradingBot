@@ -20,6 +20,7 @@ def main():
     parser.add_argument("--type", required=True)
     parser.add_argument("--quantity", type=float, required=True)
     parser.add_argument("--price", type=float)
+    parser.add_argument("--stop_price", type=float)
 
     args = parser.parse_args()
 
@@ -32,6 +33,7 @@ def main():
             order_type=args.type,
             quantity=args.quantity,
             price=args.price,
+            stop_price=args.stop_price,
         )
         logging.info("Parameter Validation Completed.")
 
@@ -50,20 +52,25 @@ def main():
             order.order_type,
             order.quantity,
             order.price,
+            order.stop_price,
         )
 
         api_response = {
-            "request": "success",
-            "orderId": response["orderId"],
-            "symbol": response["symbol"],
-            "status": response["status"],
+            "message": "success",
+            "symbol": response.get("symbol"),
+            "executedQty": response.get("executedQty"),
+            "avgPrice": response.get("avgPrice"),
+            "status": response.get("status"),
         }
+        if response.get("orderType") == "STOP":
+            api_response["algoId"] = response.get("algoId")
+        else:
+            api_response["orderId"] = response.get("orderId")
+
         print("API Response: ", api_response)
 
     except Exception as e:
-
-        print("\nOrder execution failed")
-
+        response = {"message": "failed"}
         logging.error(f"API error: {e}")
         raise CustomException(e, sys)
 

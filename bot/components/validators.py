@@ -11,19 +11,20 @@ class OrderRequest(BaseModel):
     order_type: str
     quantity: float
     price: Optional[float] = None
+    stop_price : Optional[float]=None
 
     @field_validator("side")
     @classmethod
     def validate_side(cls, value):
         if value not in ["BUY", "SELL"]:
-            raise ValueError("side must be BUY or SELL")
+            raise ValueError("side must be BUY OR SELL")
         return value
 
     @field_validator("order_type")
     @classmethod
     def validate_type(cls, value):
-        if value not in ["MARKET", "LIMIT"]:
-            raise ValueError("order_type must be MARKET or LIMIT")
+        if value not in ["MARKET", "LIMIT","STOP"]:
+            raise ValueError("order_type must be MARKET, LIMIT, STOP")
         return value
 
     @field_validator("quantity")
@@ -38,5 +39,9 @@ class OrderRequest(BaseModel):
 
         if self.order_type == "LIMIT" and self.price is None:
             raise ValueError("price is required for LIMIT order")
+        
+        if self.order_type == "STOP" and (self.price is None or self.stop_price is None):
+            raise ValueError("order type STOP require both PRICE and STOP_PRICE parameters")
 
         return self
+

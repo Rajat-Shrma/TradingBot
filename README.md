@@ -26,34 +26,6 @@ The system is designed to demonstrate clean code architecture, API interaction, 
 
 ---
 
-## Project Structure
-
-TRADING_BOT/
-
-bot/
-│
-├── components/
-│   ├── client.py
-│   ├── orders.py
-│   └── validators.py
-│
-├── custom_logging/
-│   └── custom_logging.py
-│
-├── exception/
-│   └── custom_exception.py
-│
-├── __init__.py
-
-notebooks/
-└── experiments.ipynb
-
-.env
-cli.py
-requirements.txt
-setup.py
-
----
 
 ## Requirements
 

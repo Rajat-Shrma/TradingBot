@@ -102,8 +102,8 @@ https://testnet.binancefuture.com
 Example `.env` file
 
 ```bash
-BINANCE_API_KEY=your_api_key
-BINANCE_SECRET_KEY=your_secret_key
+API_KEY=your_api_key
+SECRET_KEY=your_secret_key
 ```
 
 ---
@@ -193,15 +193,15 @@ All API requests, responses, and errors are logged.
 Log file location
 
 ```
-logs/trading_bot.log
+logs/
 ```
 
 Example log entry
 
 ```
-2026-03-14 14:12:03 | INFO | Sending order request
-2026-03-14 14:12:04 | INFO | Order response received
-2026-03-14 14:12:04 | ERROR | API error occurred
+2026-03-14 13:10:47,757 | INFO | root | Line: 15 | Message: Begins
+2026-03-14 13:10:47,757 | INFO | root | Line: 38 | Message: Parameter Validation Completed.
+2026-03-14 13:10:48,087 | INFO | root | Line: 47 | Message: Binance Client object Created.
 ```
 
 ---
@@ -216,6 +216,10 @@ The system handles:
 - Network errors
 
 Custom exceptions ensure that errors are reported clearly without crashing the application.
+For easy Debugging line number and file are inculded in error message.
+```
+Error example : bot.exception.custom_exception.CustomException: Error occured at line number [48] of file [C:\Users\hp\OneDrive\Desktop\MY\trading_bot\cli.py. Error says: [Error occured at line number [14] of file [C:\Users\hp\OneDrive\Desktop\MY\trading_by parameter 'triggerprice' was not sent, was empty/null, or malformed.]]]]
+```
 
 ---
 

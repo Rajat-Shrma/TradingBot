@@ -1,17 +1,16 @@
 from pydantic import BaseModel, field_validator, model_validator
 from typing import Optional
 
-# Pydantic Model to Validate the user input.
-
 
 class OrderRequest(BaseModel):
+    """Schema for validating order parameters from user input."""
 
     symbol: str
     side: str
     order_type: str
     quantity: float
     price: Optional[float] = None
-    stop_price : Optional[float]=None
+    stop_price: Optional[float] = None
 
     @field_validator("side")
     @classmethod
@@ -23,7 +22,7 @@ class OrderRequest(BaseModel):
     @field_validator("order_type")
     @classmethod
     def validate_type(cls, value):
-        if value not in ["MARKET", "LIMIT","STOP"]:
+        if value not in ["MARKET", "LIMIT", "STOP"]:
             raise ValueError("order_type must be MARKET, LIMIT, STOP")
         return value
 
@@ -35,13 +34,14 @@ class OrderRequest(BaseModel):
         return value
 
     @model_validator(mode="after")
-    def validate_limit_price(self):
-
+    def validate_order_prices(self):
+        # Ensure required price fields are present for order types that need them.
         if self.order_type == "LIMIT" and self.price is None:
             raise ValueError("price is required for LIMIT order")
-        
-        if self.order_type == "STOP" and (self.price is None or self.stop_price is None):
-            raise ValueError("order type STOP require both PRICE and STOP_PRICE parameters")
+
+        if self.order_type == "STOP" and (
+            self.price is None or self.stop_price is None
+        ):
+            raise ValueError("order type STOP requires both price and stop_price")
 
         return self
-
